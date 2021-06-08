@@ -10,13 +10,13 @@ origin = [
 ]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origin,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-async def generate():
+def generate():
     try:
         stream = os.popen("openssl rand -hex 32")
     except Exception as msg:
@@ -26,5 +26,9 @@ async def generate():
 
 @app.get('/generate')
 async def get_secret_key():
-    key = await generate()
+    key = generate()
     return {"secret_key": key}
+
+
+
+# https://5b9hd1.deta.dev
