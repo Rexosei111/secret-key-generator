@@ -5,12 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core';
+import { responsiveFontSizes } from '@material-ui/core';
 
-const darkTheme = createMuiTheme({
+const darkTheme = responsiveFontSizes(createMuiTheme({
   palette: {
     type: 'dark',
   },
-})
+}))
 
 ReactDOM.render(
   <ThemeProvider theme={darkTheme}>

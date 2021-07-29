@@ -16,6 +16,7 @@ import axios from "axios";
 import { useState } from "react";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Sucess from "./Sucess";
 // import CircularProgress from "@material/core/CircularProgress";
 
 const useStyles = makeStyles({
@@ -33,6 +34,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    gap: 10,
     justifyContent: "center",
     padding: 30,
     width: "100%",
@@ -51,6 +53,7 @@ function App() {
   const [key, setkey] = useState("");
   const [generating, setGenerating] = useState(false);
   const matches = useMediaQuery((theme) => theme.breakpoints.up("sm"));
+  const [open, setopen] = useState(false)
 
   const generate = () => {
     setGenerating(true);
@@ -60,7 +63,10 @@ function App() {
     });
   };
 
-  const copy_to_clipboard = () => navigator.clipboard.writeText(key);
+  const copy_to_clipboard = () => {
+    navigator.clipboard.writeText(key)
+    setopen(true)
+  };
 
   return (
     <>
@@ -78,7 +84,7 @@ function App() {
       <Container maxWidth="md" className={classes.container}>
         <Paper className={classes.paper}>
           <Typography variant={matches ? "h4" : "h6"} gutterBottom>
-            Get A Secret Key For Your Application
+            Generate a secret key for your application
           </Typography>
           <Grid container spacing={3}>
             <Grid item xs={12} md={10}>
@@ -111,6 +117,7 @@ function App() {
             </Grid>
           </Grid>
         </Paper>
+        <Sucess open={open} setopen={setopen} />
       </Container>
     </>
   );
